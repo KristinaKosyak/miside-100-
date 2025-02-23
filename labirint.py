@@ -83,8 +83,8 @@ def main():
 
         screen.fill("white")
         screen.blit(maze, (0, 0))
-        pygame.draw.rect(screen, GREEN,(green_square_x, green_square_y, green_square_size, green_square_size))
-
+        if current_maze_index <len(maze_paths) - 1:
+            pygame.draw.rect(screen, GREEN,(green_square_x, green_square_y, green_square_size, green_square_size))
 
         screen.blit(player_img, (square_x, square_y))
 
