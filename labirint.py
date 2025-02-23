@@ -18,14 +18,21 @@ def main():
 
     STEP = 10
 
-    maze, mask = load_background_img("maze.png")
+    maze_paths = ["ref/maze.png", "ref/2.png", "ref/3.png", 'ref/КІНЕЦЬ.png']
+    current_maze_index = 0
+    maze, mask =  load_background_img(maze_paths[current_maze_index])
+
 
     square_size = 35
     square_x = 10
     square_y = 10
     start_x, start_y = square_x, square_y
 
-    player_img = pygame.image.load("red.png")
+    green_square_size = 30
+    green_square_x = 760
+    green_square_y = 580
+
+    player_img = pygame.image.load("ref/red.png")
     player_img = pygame.transform.scale(player_img, (square_size, square_size))
 
 
@@ -60,8 +67,25 @@ def main():
 
                 if mask.overlap(square_mask, (square_x, square_y)) is not None:
                     square_x, square_y = start_x, start_y
+
+                if current_maze_index < len(maze_paths) - 1:
+                    player_rect = pygame.Rect(square_x, square_y, square_size, square_size)
+                    green_square_rect = pygame.Rect(green_square_x, green_square_y, green_square_size, green_square_size)
+
+                    if player_rect.colliderect(green_square_rect):
+                        current_maze_index += 1
+                        maze, mask = load_background_img(maze_paths[current_maze_index])
+                        square_x = 10
+                        square_y = 10
+
+
+
+
         screen.fill("white")
         screen.blit(maze, (0, 0))
+        pygame.draw.rect(screen, GREEN,(green_square_x, green_square_y, green_square_size, green_square_size))
+
+
         screen.blit(player_img, (square_x, square_y))
 
 
