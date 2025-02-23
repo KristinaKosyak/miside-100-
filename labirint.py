@@ -29,8 +29,8 @@ def main():
     start_x, start_y = square_x, square_y
 
     green_square_size = 30
-    green_square_x = 760
-    green_square_y = 580
+    green_square_x = 750
+    green_square_y = 550
 
     player_img = pygame.image.load("ref/red.png")
     player_img = pygame.transform.scale(player_img, (square_size, square_size))
